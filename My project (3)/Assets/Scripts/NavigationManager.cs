@@ -36,7 +36,22 @@ public class NavigationManager : MonoBehaviour
         {
             if (c != this.targetLocationParent) this.TargetLocations.Add(c);
         }
+
+        InitializeButtons();
     }
+
+    private void InitializeButtons()
+    {
+        foreach (var t in this.TargetLocations)
+        {
+            var b = GameObject.Instantiate(buttonsPrefab, buttonsParent);
+            b.GetComponentInChildren<TextMeshProUGUI>().text = t.gameObject.name;
+            b.GetComponent<Button>().onClick.AddListener(() => { this.NavigateTo(t); });
+        }
+    }
+
+    NavMeshHit hit;
+    List<Vector3> corners = new List<Vector3>();
 
     // Update is called once per frame
     void Update()
@@ -49,18 +64,6 @@ public class NavigationManager : MonoBehaviour
 
         lineRenderer.positionCount=path.corners.Length;
         lineRenderer.SetPositions(path.corners);
-    }
-
-    private void OnVisitorCreated()
-    {
-        Debug.Log("VisitorCreated");
-
-        foreach(var t in this.TargetLocations)
-        {
-            var b=GameObject.Instantiate(buttonsPrefab, buttonsParent);
-            b.GetComponentInChildren<TextMeshProUGUI>().text = t.gameObject.name;
-            b.GetComponent<Button>().onClick.AddListener(() => { this.NavigateTo(t); });
-        }
     }
 
     public void NavigateTo(Transform target){
