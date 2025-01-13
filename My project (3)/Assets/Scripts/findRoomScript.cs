@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  // Import the SceneManager for scene loading
 
 public class findRoomScript : MonoBehaviour
 {
@@ -20,5 +21,8 @@ public class findRoomScript : MonoBehaviour
     {
         Debug.Log("Button clicked!");
         print("HI");
+
+        // Load NavScene
+        SceneManager.LoadScene("NavScene");
     }
 }
