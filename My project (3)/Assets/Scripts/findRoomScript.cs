@@ -6,22 +6,28 @@ using TMPro;
 public class findRoomScript : MonoBehaviour
 {
     public Button myButton; // Drag your button into this field in the Inspector
+    public Button helpButton;
     public TMP_Dropdown dropDown;
-    
 
+    
 
     void Start()
     {
         if (dropDown == null)
-    {
+        {
         Debug.LogError("Dropdown is not assigned!");
         return;
-    }
+        }
 
-    Debug.Log("Dropdown initial state: " + dropDown.gameObject.activeSelf);
+        Debug.Log("Dropdown initial state: " + dropDown.gameObject.activeSelf);
         if (myButton == null)
         {
             Debug.LogError("myButton is not assigned in the Inspector!");
+            return;
+        }
+        if (helpButton == null)
+        {
+            Debug.LogError("helpButton is not assigned in the Inspector!");
             return;
         }
 
