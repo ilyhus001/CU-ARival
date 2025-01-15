@@ -286,6 +286,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (AR Rig)
       objectReference: {fileID: 0}
+    - target: {fileID: 2512387470528047736, guid: 48cb3fb68c91eb94999fd99957eb0cae,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512387470528047737, guid: 48cb3fb68c91eb94999fd99957eb0cae,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2512387470528047737, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
       propertyPath: m_PlanePrefab
@@ -406,7 +416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SerializedLibrary: {fileID: 0}
+  m_SerializedLibrary: {fileID: 11400000, guid: fcdd0e31ea995804f9fe61256aace06b,
+    type: 2}
   m_MaxNumberOfMovingImages: 0
   m_TrackedImagePrefab: {fileID: 0}
 --- !u!1 &363202392
@@ -703,8 +714,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -3033667219593020291, guid: ee3be5c557d68ed46bf4342230aa82af,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 6a3ad5ff15d13c54eba441b9c03bd406, type: 2}
     - target: {fileID: 919132149155446097, guid: ee3be5c557d68ed46bf4342230aa82af,
         type: 3}
       propertyPath: m_Name
@@ -1043,7 +1053,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5522e05ad5c021d4eb074dfefa96712c, type: 2}
+  - {fileID: 2100000, guid: 91ff3830fc4055a4fb0d0d2be32101a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1069,7 +1079,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
