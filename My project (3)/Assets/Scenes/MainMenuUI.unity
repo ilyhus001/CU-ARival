@@ -1381,6 +1381,7 @@ GameObject:
   - component: {fileID: 1257100703}
   - component: {fileID: 1257100707}
   - component: {fileID: 1257100708}
+  - component: {fileID: 1257100709}
   m_Layer: 5
   m_Name: MobileUI
   m_TagString: Untagged
@@ -1492,6 +1493,7 @@ MonoBehaviour:
   myButton: {fileID: 1329888518}
   helpButton: {fileID: 1292693293}
   dropDown: {fileID: 419133129}
+  navManager: {fileID: 0}
 --- !u!114 &1257100708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1551,6 +1553,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &1257100709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257100702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f2385b6b214e47a848ae2f0cf271c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+  lineRenderer: {fileID: 0}
 --- !u!1 &1292693292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,6 +2002,7 @@ MonoBehaviour:
   myButton: {fileID: 0}
   helpButton: {fileID: 0}
   dropDown: {fileID: 0}
+  navManager: {fileID: 0}
 --- !u!1 &1331628280
 GameObject:
   m_ObjectHideFlags: 0

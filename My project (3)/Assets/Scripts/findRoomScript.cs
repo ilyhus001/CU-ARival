@@ -12,6 +12,7 @@ public class findRoomScript : MonoBehaviour
 
     void Start()
     {
+        
         if (dropDown == null)
         {
             Debug.LogError("Dropdown is not assigned!");
@@ -26,8 +27,13 @@ public class findRoomScript : MonoBehaviour
 
         if (navManager == null)
         {
-            Debug.LogError("NavigationManager is not assigned!");
-            return;
+            // Get NavigationManager dynamically if not assigned in the Inspector
+            navManager = GetComponent<NavigationManager>();
+            if (navManager == null)
+            {
+                Debug.LogError("NavigationManager component is not found on this GameObject!");
+                return;
+            }
         }
 
         myButton.onClick.AddListener(OnNavigateButtonClicked);

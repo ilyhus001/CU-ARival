@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class NavigationManager : MonoBehaviour
 {
 
