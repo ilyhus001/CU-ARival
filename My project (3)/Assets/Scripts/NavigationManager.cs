@@ -20,7 +20,10 @@ public class NavigationManager : MonoBehaviour
     {
         path = new NavMeshPath();
         elapsed = 0.0f;
+
+        
     }
+
 
     // Update is called once per frame
     void Update()
@@ -37,4 +40,21 @@ public class NavigationManager : MonoBehaviour
 
 
     public void NavigateTo(GameObject go){}
+    
+    
+    public void SetDestination(string roomName)
+    {
+        // Try to find the GameObject by its name
+        GameObject roomObject = GameObject.Find(roomName);
+
+        if (roomObject != null)
+        {
+            endPoint = roomObject.transform;
+            Debug.Log("Destination set to: " + roomName);
+        }
+        else
+        {
+            Debug.LogError("Room not found: " + roomName);
+        }
+    }
 }
