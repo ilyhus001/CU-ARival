@@ -8,10 +8,12 @@ public class findRoomScript : MonoBehaviour
     public Button myButton;
     public Button helpButton;
     public TMP_Dropdown dropDown;
-    public NavigationManager navManager; // Reference to the NavigationManager script
+    private NavigationManager navManager; // Reference to the NavigationManager script
 
     void Start()
     {
+
+        navManager = GameObject.FindObjectWithTag("NavManager");
         
         if (dropDown == null)
         {

@@ -1611,7 +1611,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPoint: {fileID: 0}
-  endPoint: {fileID: 0}
   lineRenderer: {fileID: 0}
 --- !u!1 &1292693292
 GameObject:

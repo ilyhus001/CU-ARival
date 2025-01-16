@@ -7,10 +7,11 @@ using UnityEngine.AI;
 
 public class NavigationManager : MonoBehaviour
 {
+    private findRoomScript frs;
 
     public Transform startingPoint;
 
-    public Transform endPoint;
+    private Transform endPoint;
 
     public LineRenderer lineRenderer;
 
