@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class NavigationManager : MonoBehaviour
 {
 
@@ -22,6 +23,7 @@ public class NavigationManager : MonoBehaviour
         elapsed = 0.0f;
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -35,6 +37,28 @@ public class NavigationManager : MonoBehaviour
         lineRenderer.SetPositions(path.corners);
     }
 
+<<<<<<< Updated upstream
 
     public void NavigateTo(GameObject go){}
+=======
+
+    public void NavigateTo(GameObject go){}
+    
+    
+    public void SetDestination(string roomName)
+    {
+        // Try to find the GameObject by its name
+        GameObject roomObject = GameObject.Find(roomName);
+
+        if (roomObject != null)
+        {
+            endPoint = roomObject.transform;
+            Debug.Log("Destination set to the: " + endPoint);
+        }
+        else
+        {
+            Debug.LogError("Room not found: " + endPoint);
+        }
+    }
+>>>>>>> Stashed changes
 }
