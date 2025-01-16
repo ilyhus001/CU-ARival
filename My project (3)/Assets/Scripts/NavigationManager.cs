@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class NavigationManager : MonoBehaviour
 {
-
+    public static NavigationManager instance;
     public Transform startingPoint;
 
-    public Transform endPoint;
+    private Transform endPoint;
 
     public LineRenderer lineRenderer;
 
@@ -20,6 +21,9 @@ public class NavigationManager : MonoBehaviour
     {
         path = new NavMeshPath();
         elapsed = 0.0f;
+        instance = this;
+        GameObject roomObject = GameObject.Find(findRoomScript.GetDestination());
+        endPoint = roomObject.transform;
     }
 
     // Update is called once per frame
@@ -37,4 +41,6 @@ public class NavigationManager : MonoBehaviour
 
 
     public void NavigateTo(GameObject go){}
+
+
 }
