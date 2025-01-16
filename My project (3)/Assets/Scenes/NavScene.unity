@@ -1103,6 +1103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPoint: {fileID: 1034206020}
+  endPoint: {fileID: 42296078}
   lineRenderer: {fileID: 1973793308}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

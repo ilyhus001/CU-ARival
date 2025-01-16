@@ -11,7 +11,7 @@ public class NavigationManager : MonoBehaviour
 
     public Transform startingPoint;
 
-    private Transform endPoint;
+    public Transform endPoint;
 
     public LineRenderer lineRenderer;
 

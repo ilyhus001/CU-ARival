@@ -8,29 +8,10 @@ public class findRoomScript : MonoBehaviour
     public Button myButton;
     public Button helpButton;
     public TMP_Dropdown dropDown;
-    private NavigationManager navManager; // Reference to the NavigationManager script
+    public NavigationManager navManager; // Reference to the NavigationManager script
 
     void Start()
     {
-
-        GameObject navManagerObject = GameObject.FindGameObjectWithTag("NavManager");
-        if (navManagerObject != null)
-        {
-            NavigationManager navManager = navManagerObject.GetComponent<NavigationManager>();
-            if (navManager != null)
-            {
-                // Now you can use navManager as a NavigationManager instance
-                this.navManager = navManager;
-            }
-            else
-            {
-                Debug.LogError("NavigationManager component not found on the GameObject tagged as 'NavManager'.");
-            }
-        }
-        else
-        {
-            Debug.LogError("No GameObject found with the tag 'NavManager'.");
-        }
 
         if (dropDown == null)
         {
