@@ -13,8 +13,25 @@ public class findRoomScript : MonoBehaviour
     void Start()
     {
 
-        navManager = GameObject.FindObjectWithTag("NavManager");
-        
+        GameObject navManagerObject = GameObject.FindGameObjectWithTag("NavManager");
+        if (navManagerObject != null)
+        {
+            NavigationManager navManager = navManagerObject.GetComponent<NavigationManager>();
+            if (navManager != null)
+            {
+                // Now you can use navManager as a NavigationManager instance
+                this.navManager = navManager;
+            }
+            else
+            {
+                Debug.LogError("NavigationManager component not found on the GameObject tagged as 'NavManager'.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No GameObject found with the tag 'NavManager'.");
+        }
+
         if (dropDown == null)
         {
             Debug.LogError("Dropdown is not assigned!");
