@@ -59,7 +59,7 @@ public class findRoomScript : MonoBehaviour
         locationText.text = "Navigating to room" + selectedRoom;
 
         // Optionally load the navigation scene
-        SceneManager.LoadScene("NavScene");
+        //SceneManager.LoadScene("NavScene");
     }
 
     public void SetDestination(string roomName)
