@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -9,38 +6,52 @@ public class NavigationManager : MonoBehaviour
 {
     public static NavigationManager instance;
     public Transform startingPoint;
-
     private Transform endPoint;
-
     public LineRenderer lineRenderer;
-
-    float elapsed; 
+    float elapsed;
     public NavMeshPath path;
-    // Start is called before the first frame update
+
     void Start()
     {
         path = new NavMeshPath();
         elapsed = 0.0f;
         instance = this;
+
         GameObject roomObject = GameObject.Find(findRoomScript.GetDestination());
-        endPoint = roomObject.transform;
+        if (roomObject != null)
+        {
+            endPoint = roomObject.transform;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         elapsed += Time.deltaTime;
-        if(elapsed > 1.0f){
+        if (elapsed > 1.0f)
+        {
             elapsed -= 1.0f;
-            NavMesh.CalculatePath(startingPoint.position, endPoint.position,NavMesh.AllAreas, path);
+            if (endPoint != null)
+            {
+                NavMesh.CalculatePath(startingPoint.position, endPoint.position, NavMesh.AllAreas, path);
+                lineRenderer.positionCount = path.corners.Length;
+                lineRenderer.SetPositions(path.corners);
+            }
         }
-
-        lineRenderer.positionCount=path.corners.Length;
-        lineRenderer.SetPositions(path.corners);
     }
 
+    public void UpdateNavigationTarget(string roomName)
+    {
+        
+        GameObject roomObject = GameObject.Find(roomName);
 
-    public void NavigateTo(GameObject go){}
-
-
+        if (roomObject != null)
+        {
+            endPoint = roomObject.transform;  
+            Debug.Log("Navigation room updated: " + roomName);
+        }
+        else
+        {
+            Debug.LogError("Room not found: " + roomName);
+        }
+    }
 }
