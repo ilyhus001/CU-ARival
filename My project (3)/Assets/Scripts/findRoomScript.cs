@@ -10,6 +10,7 @@ public class findRoomScript : MonoBehaviour
     //public TMP_Dropdown dropDown;
     private static string destination;
     private Button clickedButton; 
+    public TMP_Text locationText;
 
     void Start()
     {
@@ -55,6 +56,7 @@ public class findRoomScript : MonoBehaviour
 
         // Pass the selected room to the NavigationManager
         SetDestination(selectedRoom.Replace(" ", "").Trim());
+        locationText.text = "Navigating to room" + selectedRoom;
 
         // Optionally load the navigation scene
         SceneManager.LoadScene("NavScene");
