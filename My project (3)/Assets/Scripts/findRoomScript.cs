@@ -5,39 +5,51 @@ using TMPro;
 
 public class findRoomScript : MonoBehaviour
 {
-    public Button myButton;
-    public Button helpButton;
-    public TMP_Dropdown dropDown;
-    // public NavigationManager navManager; // Reference to the NavigationManager script
+    public Button Button5201;
+    public Button Button5107;
+    //public TMP_Dropdown dropDown;
     private static string destination;
-
+    private Button clickedButton; 
 
     void Start()
     {
-
-        if (dropDown == null)
+        if (Button5201 == null)
         {
-            Debug.LogError("Dropdown is not assigned!");
+            Debug.LogError("Button5201 is not assigned!");
             return;
         }
 
-        if (myButton == null)
+        if (Button5107 == null)
         {
-            Debug.LogError("myButton is not assigned in the Inspector!");
+            Debug.LogError("Button5107 is not assigned!");
             return;
         }
 
-        myButton.onClick.AddListener(OnNavigateButtonClicked);
+        Button5201.onClick.AddListener(() => OnNavigateButtonClicked(Button5201));
+        Button5107.onClick.AddListener(() => OnNavigateButtonClicked(Button5107));
     }
 
     public string GetRoom()
     {
-        int selectedIndex = dropDown.value;
-        return dropDown.options[selectedIndex].text;
+        if (clickedButton == null)
+        {
+            Debug.LogWarning("No button has been clicked");
+            return null;
+        }
+
+        TextMeshProUGUI textComponent = clickedButton.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent != null)
+        {
+            return textComponent.text; 
+        }
+
+        Debug.LogError("No TextMeshProUGUI component found lol");
+        return null;
     }
 
-    private void OnNavigateButtonClicked()
+    private void OnNavigateButtonClicked(Button button)
     {
+        clickedButton = button; 
         string selectedRoom = GetRoom();
         Debug.Log("Selected Room: " + selectedRoom);
 
@@ -48,16 +60,13 @@ public class findRoomScript : MonoBehaviour
         SceneManager.LoadScene("NavScene");
     }
 
-
-     public void SetDestination(string roomName)
+    public void SetDestination(string roomName)
     {
-        // Try to find the GameObject by its name
-
         destination = roomName;
-
     }
 
-    public static string GetDestination(){
+    public static string GetDestination()
+    {
         return destination;
     }
 }
