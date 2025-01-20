@@ -9,6 +9,13 @@ public class AnimationSCript : MonoBehaviour
 
     public void ButtonPress(){
         animator.SetBool("ButtonPress",true);
+        animator.SetBool("NavigationTargetSelected",false);
+
+    }
+
+    public void navigationTargetSelected(){
+        animator.SetBool("NavigationTargetSelected",true);
+        animator.SetBool("ButtonPress",false);
     }
     // Start is called before the first frame update
     void Start()
