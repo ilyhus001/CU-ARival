@@ -27,3 +27,13 @@ MonoBehaviour:
     m_SpecifySize: 0
     m_Name: Unity-logo
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4708937032588901219
+      m_GuidHigh: 1425371960292064944
+    m_SerializedTextureGuid:
+      m_GuidLow: 0
+      m_GuidHigh: 0
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: 
+    m_Texture: {fileID: 0}
