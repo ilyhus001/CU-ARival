@@ -731,7 +731,7 @@ PrefabInstance:
     - target: {fileID: 2512387470528047738, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.26
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 2512387470528047738, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
@@ -741,7 +741,7 @@ PrefabInstance:
     - target: {fileID: 2512387470528047738, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.58
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 2512387470528047738, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
@@ -839,8 +839,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: fcdd0e31ea995804f9fe61256aace06b,
     type: 2}
-  m_MaxNumberOfMovingImages: 0
-  m_TrackedImagePrefab: {fileID: 0}
+  m_MaxNumberOfMovingImages: 4
+  m_TrackedImagePrefab: {fileID: 4385739215250598473, guid: 4914c6dddfd12a54a879e1ff4d24e080,
+    type: 3}
 --- !u!4 &331264290 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2512387469002778308, guid: 48cb3fb68c91eb94999fd99957eb0cae,
@@ -1480,7 +1481,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c8493f9fe52641445b212daa7db1c889, type: 2}
+      objectReference: {fileID: 2100000, guid: 6a3ad5ff15d13c54eba441b9c03bd406, type: 2}
     - target: {fileID: 919132149155446097, guid: ee3be5c557d68ed46bf4342230aa82af,
         type: 3}
       propertyPath: m_Name
@@ -2925,7 +2926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingPoint: {fileID: 331264290}
   lineRenderer: {fileID: 1973793308}
-  meters: {fileID: 0}
+  trackedImageManager: {fileID: 0}
 --- !u!1 &2062243113
 GameObject:
   m_ObjectHideFlags: 0
