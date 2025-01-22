@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 public class NavigationManager : MonoBehaviour
 {
@@ -10,6 +11,33 @@ public class NavigationManager : MonoBehaviour
     public LineRenderer lineRenderer;
     float elapsed;
     public NavMeshPath path;
+
+    [SerializeField] private ARTrackedImageManager trackedImageManager;
+
+
+    private void OnEnable() => trackedImageManager.trackedImagesChanged += OnChanged;
+
+    private void OnDisable() => trackedImageManager.trackedImagesChanged -= OnChanged;
+
+    private void OnChanged(ARTrackedImagesChangedEventArgs eventArgs){
+
+        foreach (var newImage in eventArgs.added){
+            Vector3 imagePosition = newImage.transform.localToWorldMatrix.GetColumn(3); 
+
+            Quaternion imageRotation = newImage.transform.rotation;
+
+            Pose imagePose = new Pose(imagePosition, imageRotation);
+
+            startingPoint.position = imagePose.position;
+            startingPoint.rotation = imagePose.rotation;
+            
+            
+                    }
+
+
+    }
+
+
 
     void Start()
     {
