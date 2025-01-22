@@ -18,22 +18,12 @@ MonoBehaviour:
     m_Storage: []
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 5358420462424468898
-      m_GuidHigh: 4138453946428151193
+      m_GuidLow: 5619599418011067132
+      m_GuidHigh: 9426163794656297865
     m_SerializedTextureGuid:
-      m_GuidLow: 4293163947870510110
-      m_GuidHigh: 9592279371652888393
+      m_GuidLow: 6729559515192820806
+      m_GuidHigh: 6837104264810966651
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
-    m_Name: Unity-logo
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 4708937032588901219
-      m_GuidHigh: 1425371960292064944
-    m_SerializedTextureGuid:
-      m_GuidLow: 0
-      m_GuidHigh: 0
-    m_Size: {x: 0, y: 0}
-    m_SpecifySize: 0
-    m_Name: 
-    m_Texture: {fileID: 0}
+    m_Name: 5107
+    m_Texture: {fileID: 2800000, guid: 6deb044632b95d647bae5db41a46e25e, type: 3}
