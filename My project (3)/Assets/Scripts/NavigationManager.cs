@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using TMPro;
 
 public class NavigationManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class NavigationManager : MonoBehaviour
     public LineRenderer lineRenderer;
     float elapsed;
     public NavMeshPath path;
+
+    public TMP_Text meters;
 
     void Start()
     {
@@ -22,6 +25,7 @@ public class NavigationManager : MonoBehaviour
         {
             endPoint = roomObject.transform;
         }
+        meters.text = $"{CalculatePathDistance(path):F1} m";
     }
 
     void Update()
@@ -35,6 +39,9 @@ public class NavigationManager : MonoBehaviour
                 NavMesh.CalculatePath(startingPoint.position, endPoint.position, NavMesh.AllAreas, path);
                 lineRenderer.positionCount = path.corners.Length;
                 lineRenderer.SetPositions(path.corners);
+
+                float distance = CalculatePathDistance(path);
+                meters.text = $"{distance:F1} m"; 
             }
         }
     }
@@ -53,5 +60,22 @@ public class NavigationManager : MonoBehaviour
         {
             Debug.LogError("Room not found: " + roomName);
         }
+    }
+
+    private float CalculatePathDistance(NavMeshPath navPath)
+    {
+        if (navPath.corners.Length < 2)
+        {
+            return 0f;
+        }
+
+        float totalDistance = 0f;
+
+        for (int i = 0; i < navPath.corners.Length - 1; i++)
+        {
+            totalDistance += Vector3.Distance(navPath.corners[i], navPath.corners[i + 1]);
+        }
+
+        return totalDistance;
     }
 }

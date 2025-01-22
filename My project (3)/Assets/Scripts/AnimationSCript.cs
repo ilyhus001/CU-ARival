@@ -13,12 +13,20 @@ public class AnimationSCript : MonoBehaviour
     public void ButtonPress(){
         animator.SetBool("ButtonPress",true);
         animator.SetBool("NavigationTargetSelected",false);
+        animator.SetBool("pullDownPressed", false);
+    }
+    public void DropDownButtonPress(){
+        animator.SetBool("pullDownPressed",true);
+        animator.SetBool("NavigationTargetSelected",true);
+        animator.SetBool("ButtonPress", false);
     }
 
     public void navigationTargetSelected(){
         animator.SetBool("NavigationTargetSelected",true);
         animator.SetBool("ButtonPress",false);
+        animator.SetBool("pullDownPressed",true);
         navTarget.SetBool("locationPressed",true);
+
     }
     // Start is called before the first frame update
     void Start()
