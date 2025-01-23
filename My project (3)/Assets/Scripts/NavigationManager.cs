@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
-using Unity.XR.CoreUtils; // For XR Origin
+using Unity.XR.CoreUtils;
+using Unity.VisualScripting;
 
 public class NavigationManager : MonoBehaviour
 {
@@ -17,71 +17,76 @@ public class NavigationManager : MonoBehaviour
     [SerializeField] private ARTrackedImageManager trackedImageManager;
     private XROrigin xrOrigin; // Reference to XR Origin
 
+    void Awake()
+    {
+        // Ensure singleton pattern
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        path = new NavMeshPath();
+    }
+
     void Start()
     {
-        path = new NavMeshPath();
-        elapsed = 0.0f;
-        instance = this;
-
-        // Get reference to XR Origin
+        animator.SetBool("ButtonPress",true);
+        // Find the XR Origin
         xrOrigin = FindObjectOfType<XROrigin>();
         if (xrOrigin == null)
         {
             Debug.LogError("XR Origin not found!");
+            return;
         }
 
-        GameObject roomObject = GameObject.Find(findRoomScript.GetDestination());
-        if (roomObject != null)
+        // Update starting point to current XR Origin camera
+        startingPoint = xrOrigin.Camera.transform;
+
+        string targetName = Scanner.imageName;
+        if (!string.IsNullOrEmpty(targetName))
         {
-            endPoint = roomObject.transform;
-        }
-    }
-
-    private void OnEnable() => trackedImageManager.trackedImagesChanged += OnChanged;
-
-    private void OnDisable() => trackedImageManager.trackedImagesChanged -= OnChanged;
-
-    private void OnChanged(ARTrackedImagesChangedEventArgs eventArgs)
-    {
-        Debug.Log("Image detected");
-
-        foreach (var newImage in eventArgs.added)
-        {
-            string imageName = newImage.referenceImage.name;
-            GameObject targetObject = GameObject.Find(imageName);
-
+            GameObject targetObject = GameObject.Find(targetName);
             if (targetObject != null)
             {
-                // Calculate the position difference between the detected image and the target object
-                Vector3 offsetPosition = targetObject.transform.position - newImage.transform.position;
-                Quaternion offsetRotation = targetObject.transform.rotation * Quaternion.Inverse(newImage.transform.rotation);
+                xrOrigin.transform.position = targetObject.transform.position;
+                xrOrigin.transform.rotation = targetObject.transform.rotation;
 
-                // Manually update the XR Origin's position and rotation
-                xrOrigin.transform.position += offsetPosition;
-                xrOrigin.transform.rotation = offsetRotation;
-
-                animator.SetBool("ButtonPress",true);
-
-                Debug.Log($"XR Origin manually adjusted to align with {imageName} location.");
+                Debug.Log($"XR Origin aligned to {targetName} at position: {targetObject.transform.position}");
             }
             else
             {
-                Debug.LogError($"Could not find object named: {imageName}");
+                Debug.LogError($"Target object {targetName} not found in the 3D map!");
             }
+        }
+        else
+        {
+            Debug.LogWarning("Target name from Scanner script is empty!");
         }
     }
 
     void Update()
     {
         elapsed += Time.deltaTime;
-        if (elapsed > 1.0f)
+        if (elapsed > 0.5f) // Reduced interval for more responsive updates
         {
-            elapsed -= 1.0f;
-            if (endPoint != null)
+            elapsed = 0f;
+            if (endPoint != null && startingPoint != null)
             {
-                NavMesh.CalculatePath(startingPoint.position, endPoint.position, NavMesh.AllAreas, path);
-                lineRenderer.positionCount = path.corners.Length;
-                lineRenderer.SetPositions(path.corners);
+                Vector3 currentPosition = startingPoint.position;
+                
+                // Calculate path
+                NavMesh.CalculatePath(currentPosition, endPoint.position, NavMesh.AllAreas, path);
+                
+                // Update line renderer
+                if (path.corners.Length > 0)
+                {
+                    lineRenderer.positionCount = path.corners.Length;
+                    lineRenderer.SetPositions(path.corners);
+                }
             }
         }
     }
