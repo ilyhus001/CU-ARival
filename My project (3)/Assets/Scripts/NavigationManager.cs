@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class NavigationManager : MonoBehaviour
 {
     public static NavigationManager instance;
-    public Transform startingPoint; // Reference to AR Camera
+    public Transform startingPoint; 
     private Transform endPoint;
     public LineRenderer lineRenderer;
     float elapsed;
@@ -15,7 +15,7 @@ public class NavigationManager : MonoBehaviour
     [SerializeField] private Animator animator;
 
     [SerializeField] private ARTrackedImageManager trackedImageManager;
-    private XROrigin xrOrigin; // Reference to XR Origin
+    private XROrigin xrOrigin; 
 
     void Awake()
     {
@@ -35,7 +35,7 @@ public class NavigationManager : MonoBehaviour
     void Start()
     {
         animator.SetBool("ButtonPress",true);
-        // Find the XR Origin
+
         xrOrigin = FindObjectOfType<XROrigin>();
         if (xrOrigin == null)
         {
@@ -43,7 +43,6 @@ public class NavigationManager : MonoBehaviour
             return;
         }
 
-        // Update starting point to current XR Origin camera
         startingPoint = xrOrigin.Camera.transform;
 
         string targetName = Scanner.imageName;
@@ -71,17 +70,16 @@ public class NavigationManager : MonoBehaviour
     void Update()
     {
         elapsed += Time.deltaTime;
-        if (elapsed > 0.5f) // Reduced interval for more responsive updates
+        if (elapsed > 0.5f) 
         {
             elapsed = 0f;
             if (endPoint != null && startingPoint != null)
             {
                 Vector3 currentPosition = startingPoint.position;
                 
-                // Calculate path
                 NavMesh.CalculatePath(currentPosition, endPoint.position, NavMesh.AllAreas, path);
                 
-                // Update line renderer
+                
                 if (path.corners.Length > 0)
                 {
                     lineRenderer.positionCount = path.corners.Length;
