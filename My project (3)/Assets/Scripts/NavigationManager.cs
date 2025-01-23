@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.XR.ARFoundation;
 
 public class NavigationManager : MonoBehaviour
@@ -13,7 +12,6 @@ public class NavigationManager : MonoBehaviour
     float elapsed;
     public NavMeshPath path;
 
-    public TMP_Text meters;
     [SerializeField] private ARTrackedImageManager trackedImageManager;
 
 
@@ -22,23 +20,35 @@ public class NavigationManager : MonoBehaviour
     private void OnDisable() => trackedImageManager.trackedImagesChanged -= OnChanged;
 
     private void OnChanged(ARTrackedImagesChangedEventArgs eventArgs){
+                Debug.Log("Image");
 
         foreach (var newImage in eventArgs.added){
-            Vector3 imagePosition = newImage.transform.localToWorldMatrix.GetColumn(3); 
+            string imageName = newImage.referenceImage.name;
+            Transform targetObject = GameObject.Find(imageName).transform;
+            if(targetObject != null){
+                startingPoint.position = targetObject.transform.position;
+                startingPoint.rotation = targetObject.transform.rotation;
+                Debug.Log($"Starting point repositioned to {imageName} location");
 
-            Quaternion imageRotation = newImage.transform.rotation;
+            }
+            else{
+                Debug.Log($"Starting point repositioned to {imageName} location");
+            }
+        }
+        foreach (var updatedImage in eventArgs.updated){
+            string imageName = updatedImage.referenceImage.name;
+            Transform targetObject = GameObject.Find(imageName).transform;
+            if(targetObject != null){
+                startingPoint.position = targetObject.transform.position;
+                startingPoint.rotation = targetObject.transform.rotation;
+                Debug.Log($"Starting point repositioned to {imageName} location");
 
-            Pose imagePose = new Pose(imagePosition, imageRotation);
-
-            startingPoint.position = imagePose.position;
-            startingPoint.rotation = imagePose.rotation;
-            
-            
-                    }
-
-
+            }
+            else{
+                Debug.Log($"Starting point repositioned to {imageName} location");
+            }
+        }
     }
-
 
     void Start()
     {
@@ -51,7 +61,6 @@ public class NavigationManager : MonoBehaviour
         {
             endPoint = roomObject.transform;
         }
-        meters.text = $"{CalculatePathDistance(path):F1} m";
     }
 
     void Update()
@@ -65,21 +74,18 @@ public class NavigationManager : MonoBehaviour
                 NavMesh.CalculatePath(startingPoint.position, endPoint.position, NavMesh.AllAreas, path);
                 lineRenderer.positionCount = path.corners.Length;
                 lineRenderer.SetPositions(path.corners);
-
-                float distance = CalculatePathDistance(path);
-                meters.text = $"{distance:F1} m"; 
             }
         }
     }
 
     public void UpdateNavigationTarget(string roomName)
     {
-        
+
         GameObject roomObject = GameObject.Find(roomName);
 
         if (roomObject != null)
         {
-            endPoint = roomObject.transform;  
+            endPoint = roomObject.transform;
             Debug.Log("Navigation room updated: " + roomName);
         }
         else
@@ -87,22 +93,4 @@ public class NavigationManager : MonoBehaviour
             Debug.LogError("Room not found: " + roomName);
         }
     }
-
-    private float CalculatePathDistance(NavMeshPath navPath)
-    {
-        if (navPath.corners.Length < 2)
-        {
-            return 0f;
-        }
-
-        float totalDistance = 0f;
-
-        for (int i = 0; i < navPath.corners.Length - 1; i++)
-        {
-            totalDistance += Vector3.Distance(navPath.corners[i], navPath.corners[i + 1]);
-        }
-
-        return totalDistance;
-    }
 }
-
