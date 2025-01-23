@@ -12,6 +12,7 @@ public class NavigationManager : MonoBehaviour
     public LineRenderer lineRenderer;
     float elapsed;
     public NavMeshPath path;
+    [SerializeField] private Animator animator;
 
     [SerializeField] private ARTrackedImageManager trackedImageManager;
     private XROrigin xrOrigin; // Reference to XR Origin
@@ -58,6 +59,8 @@ public class NavigationManager : MonoBehaviour
                 // Manually update the XR Origin's position and rotation
                 xrOrigin.transform.position += offsetPosition;
                 xrOrigin.transform.rotation = offsetRotation;
+
+                animator.SetBool("ButtonPress",true);
 
                 Debug.Log($"XR Origin manually adjusted to align with {imageName} location.");
             }
